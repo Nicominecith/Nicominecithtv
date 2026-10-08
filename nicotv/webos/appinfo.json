@@ -1,0 +1,1 @@
+{"id":"com.nico.nicotv","version":"2.16.3","vendor":"Nico","type":"web","main":"index.html","title":"Nicominecith TV","icon":"icon.png","largeIcon":"largeIcon.png","iconColor":"#8c1d2c","bgImage":"bg.jpg","splashBackground":"bg.jpg","uiRevision":2,"resolution":"1920x1080","disableBackHistoryAPI":true,"vendorExtension":{"allowCrossDomain":true}}

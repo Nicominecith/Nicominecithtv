@@ -1,0 +1,5 @@
+dist/
+tools/key.pem
+tools/cert.pem
+*.keystore
+.DS_Store

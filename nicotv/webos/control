@@ -1,0 +1,10 @@
+Package: com.nico.nicotv
+Version: 2.16.3
+Section: misc
+Priority: optional
+Architecture: all
+Installed-Size: 304
+Maintainer: N/A <nobody@example.com>
+Description: This is a webOS application.
+webOS-Package-Format-Version: 2
+webOS-Packager-Version: x.y.x
