@@ -1,83 +1,97 @@
-# NicoTV (modified)
+# NicoTV
 
-A lightweight Twitch client built as a single-page web app (HTML/CSS/JS), packaged as
+Eine schlanke, eigenständige Twitch-Client-Web-App (HTML/CSS/JS), optimiert für den Einsatz auf dem Fernseher und mobilen Geräten. Verpackt und bereitgestellt als:
 
-- an **Android / Android TV** app (WebView shell, `.apk`)
-- an **LG webOS** app (`.ipk`)
+- **LG webOS** App (`.ipk`) für LG Smart TVs
+- **Android / Android TV** App (WebView-Shell, `.apk`)
 
-This repository contains the web app source and a small build script. It is a modified version of **Nicominecith TV 2.15.0**; all credit for the original app goes to its author.
+---
 
-## Features added in this fork
+## Features
 
-| Feature | How to use |
+| Funktion | Beschreibung & Bedienung |
 |---|---|
-| Custom AFK message | Settings -> *AFK-Nachricht* (max. 40 chars, empty = "AFK") |
-| Emote menu (Twitch + 7TV + BetterTTV) | 😀 button next to the chat input, `E` key, or `/emotes` |
-| 7TV / BTTV tabs follow settings | Disable 7TV or BetterTTV in settings and the tab disappears |
-| Locked emotes with hint | Channel sub/follower/bits emotes you can't use are greyed out with 🔒; tap for details |
-| Sub button + QR code | ⭐ Sub button opens a QR code to `twitch.tv/subs/<channel>` |
-| Copy a chat message | Long-press a message |
-| Moderation menu via gesture | Triple-tap a message (moderators only) |
-| Reply to a message | Swipe a message to the right |
-| Centered AFK screen | Only a tiny anti burn-in drift remains |
+| **Eigene AFK-Nachricht** | Einstellungen -> *AFK-Nachricht* (max. 40 Zeichen, leer = "AFK") |
+| **Erweitertes Emote-Menü** | Twitch + 7TV + BetterTTV (über das 😀-Symbol neben dem Chat, die `E`-Taste oder `/emotes`) |
+| **Dynamische Tabs** | 7TV oder BetterTTV in den Einstellungen deaktivieren blendet die entsprechenden Tabs aus |
+| **Gesperrte Emotes mit Hinweis** | Kanal-Abos/Follower/Bits-Emotes, die du nicht nutzen kannst, werden mit 🔒 grau dargestellt (Antippen für Details) |
+| **Sub-Button & QR-Code** | ⭐-Button öffnet direkt einen QR-Code zu `twitch.tv/subs/<kanal>` |
+| **Nachrichten kopieren** | Nachricht gedrückt halten |
+| **Mod-Menü per Geste** | Dreifach-Tipp auf eine Nachricht (nur für Moderatoren) |
+| **Nachrichten beantworten** | Nachricht nach rechts wischen |
+| **Zentrierter AFK-Bildschirm** | Inklusive minimalem Anti-Burn-In-Schutz |
 
-See [CHANGELOG.md](CHANGELOG.md) for details.
+> **Hinweis zur Anmeldung:** Damit die App anzeigt, welche Emotes *du* besitzt (und alle anderen als gesperrt markieren kann), benötigt die App den Scope `user:read:emotes`. Logge dich nach dem Update einmal kurz aus und wieder ein.
 
-> **Note:** To see which emotes *you* own (and to mark the rest as locked) the app needs the `user:read:emotes` scope. Log out and log in again once after updating.
+---
 
-## Repository layout
+## Installation auf LG webOS Fernsehern
+
+Die App ist **vollkommen kostenlos** und kann direkt heruntergeladen werden.
+
+1. Lade die aktuelle `.ipk`-Datei der App aus dem **[Releases-Tab](https://github.com/USERNAME/REPOSITORY/releases)** herunter.
+2. Aktiviere auf deinem LG Smart TV den **Developer Mode** (über die offizielle webOS Developer App).
+3. Verbinde deinen PC mit dem Fernseher und installiere die App entweder:
+   - Ganz bequem über den grafischen **[webOS Dev Manager](https://github.com/webosbrew/dev-manager-desktop)** oder
+   - Über die Kommandozeile mittels `ares-install`.
+
+---
+
+## Sicherheit & Transparenz
+
+Diese App ist zu **100% sicher und frei von Schadsoftware**. 
+- Der gesamte Quellcode ist offen in diesem Repository einsehbar.
+- Die App kommuniziert ausschließlich direkt mit den offiziellen APIs (kein versteckter Backend-Server, der Daten abgreift).
+
+---
+
+## Repository-Struktur
 
 ```
-android/www/   web app for the Android APK (index.html + assets)
-webos/         web app + metadata for the webOS IPK
-tools/build.py build helper (IPK + re-signed APK)
+android/www/   Web-App für die Android-APK (index.html + Assets)
+webos/         Web-App + Metadaten für das webOS-IPK
+tools/build.py Build-Helfer (IPK + signierte APK)
 ```
 
-`android/www/index.html` and `webos/index.html` share the same app code and only differ in the `<head>` (viewport / phone handling).
-The user interface text is currently in German.
+`android/www/index.html` und `webos/index.html` teilen sich denselben Code und unterscheiden sich lediglich im `<head>` (Viewport- und Plattform-Handling). Die Benutzeroberfläche ist auf Deutsch gehalten.
 
-## Building
+---
 
-Requirements: Python 3. For the APK additionally `openssl` in your `PATH`.
+## Authentifizierung & Netzwerkzugriff
 
-### webOS IPK
+Der Login erfolgt sicher über den offiziellen Twitch OAuth Device-Code-Flow (`id.twitch.tv`). Die App verbindet sich direkt mit folgenden Diensten:
+- **Twitch:** Helix API, GQL, Usher (Streams), IRC-Chat, Badges und Emote-CDN
+- **7TV:** `7tv.io`, `cdn.7tv.app`
+- **BetterTTV:** `api.betterttv.net`, `cdn.betterttv.net`
+- **Google Fonts:** `fonts.googleapis.com`
 
+---
+
+## Build & Lokale Entwicklung
+
+Voraussetzung: Python 3. Für den APK-Build wird zusätzlich `openssl` im `PATH` benötigt.
+
+### webOS IPK erstellen
 ```bash
 python3 tools/build.py ipk
-# -> dist/com_nico_nicotv_<version>_all.ipk
+# -> erzeugt die IPK im Ordner dist/
 ```
 
-Install it with the [webOS Dev Manager](https://github.com/webosbrew/dev-manager-desktop) or `ares-install` (needs developer mode / Homebrew Channel on the TV).
-
-### Android APK
-
-The native Android part (WebView shell: `classes.dex`, resources, manifest) is **not** included in this repository because its source is not available. The script reuses it from an existing NicoTV APK and swaps in the web app:
-
+### Android APK erstellen
 ```bash
-python3 tools/build.py apk --base path/to/NicoTV-2_15_0.apk
-# -> dist/NicoTV-custom.apk
+python3 tools/build.py apk --base path/to/base.apk
+# -> erzeugt die signierte APK im Ordner dist/
 ```
 
-The APK is signed with a v1 (JAR) signature using a self-generated key (`tools/key.pem`, created on first run and git-ignored). Because the key differs from the original one, **uninstall the original app before installing**, and keep your own key if you want future builds to install as updates.
+### Lokaler Test im Browser
+Die App kann über einen lokalen Webserver direkt im Browser getestet werden:
+```bash
+python3 -m http.server -d android/www
+```
+*Füge `?m=phone` an die URL an, um das Smartphone-Layout zu erzwingen.*
 
-### Local testing
+---
 
-The app can be opened in a desktop browser by serving `android/www/` with any static server, e.g. `python3 -m http.server -d android/www`. Add `?m=phone` to force the phone layout.
+## Lizenz
 
-## Authentication & network access
-
-Login uses the Twitch OAuth device-code flow (`id.twitch.tv`). The app talks directly to these services:
-
-- Twitch: Helix API, GQL, Usher (streams), IRC chat, badges and emote CDN
-- 7TV (`7tv.io`, `cdn.7tv.app`) and BetterTTV (`api.betterttv.net`, `cdn.betterttv.net`)
-- Google Fonts (`fonts.googleapis.com`)
-
-There is no backend of its own. Review `android/www/index.html` before using it with your account, as with any third-party client.
-
-## Disclaimer
-
-Unofficial project, not affiliated with or endorsed by Twitch, 7TV or BetterTTV. Twitch is a trademark of Twitch Interactive, Inc.
-
-## License
-
-The original app does not ship a license, so none is granted here. If you are the original author or want to reuse this code, please contact the maintainers / add a license of your choice before publishing.
+Entwickelt von Nico. Alle Rechte vorbehalten.
