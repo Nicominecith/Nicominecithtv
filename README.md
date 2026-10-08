@@ -1,6 +1,6 @@
-# NicoTV
+# NicominecithTV
 
-Eine schlanke, eigenständige Twitch-Client-Web-App (HTML/CSS/JS), optimiert für den Einsatz auf dem Fernseher und mobilen Geräten. Verpackt und bereitgestellt als:
+Eine schlanke, eigenständige Twitch-Client-Web-App (HTML/CSS/JS), optimiert für den Einsatz auf dem Fernseher und mobilen Geräten. Entwickelt von Nicominecith und bereitgestellt als:
 
 - **LG webOS** App (`.ipk`) für LG Smart TVs
 - **Android / Android TV** App (WebView-Shell, `.apk`)
@@ -29,7 +29,7 @@ Eine schlanke, eigenständige Twitch-Client-Web-App (HTML/CSS/JS), optimiert fü
 
 Die App ist **vollkommen kostenlos** und kann direkt heruntergeladen werden.
 
-1. Lade die aktuelle `.ipk`-Datei der App aus dem **[Releases-Tab](https://github.com/USERNAME/REPOSITORY/releases)** herunter.
+1. Lade die aktuelle `.ipk`-Datei der App aus dem **[Releases-Tab](https://github.com/Nicominecith/NicominecithTV/releases)** herunter.
 2. Aktiviere auf deinem LG Smart TV den **Developer Mode** (über die offizielle webOS Developer App).
 3. Verbinde deinen PC mit dem Fernseher und installiere die App entweder:
    - Ganz bequem über den grafischen **[webOS Dev Manager](https://github.com/webosbrew/dev-manager-desktop)** oder
@@ -94,4 +94,4 @@ python3 -m http.server -d android/www
 
 ## Lizenz
 
-Entwickelt von Nico. Alle Rechte vorbehalten.
+Entwickelt von Nicominecith. Alle Rechte vorbehalten.
